@@ -1,0 +1,25 @@
+name: JustName
+version: '${project.version}'
+main: me.fortibrine.justname.JustName
+api-version: 1.16
+
+commands:
+  changename:
+    usage: "§7/changename [Имя] [Фамилия]"
+    description: "Команда для установки имени"
+
+depend: [Vault]
+
+permissions:
+  justname.*:
+    description: "Все права"
+    default: op
+    children:
+      justname.changename: true
+      justname.changename.list: true
+  justname.changename:
+    default: true
+    description: "Изменить своё имя"
+  justname.changename.list:
+    default: op
+    description: "Изменить другим имя"
