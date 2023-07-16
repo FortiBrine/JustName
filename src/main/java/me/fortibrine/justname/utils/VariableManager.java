@@ -4,6 +4,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class VariableManager {
 
@@ -26,11 +27,14 @@ public class VariableManager {
         itemStacks.put(playerName, item);
     }
 
-    public static ItemStack getItemStack(String playerName) {
+    public static ItemStack getItemStacks(String playerName) {
         return itemStacks.get(playerName);
     }
 
     public static void removeItemStack(String playerName) {
         itemStacks.remove(playerName);
+    }
+    public static Set<String> keySetItemStacks() {
+        return itemStacks.keySet();
     }
 }

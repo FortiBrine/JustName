@@ -19,7 +19,7 @@ public final class HEXManager {
             return nameMessage;
         }
 
-        if (Integer.parseInt(sversion.split("\\.")[1]) < 16) {
+        if (Integer.parseInt(sversion.split("\\_")[1]) < 16) {
             return nameMessage;
         }
 

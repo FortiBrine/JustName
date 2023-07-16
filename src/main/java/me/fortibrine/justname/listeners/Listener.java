@@ -16,6 +16,8 @@ public class Listener implements org.bukkit.event.Listener {
         if (inventory.getHolder() == null) return;
         if (!(inventory.getHolder() instanceof ChangeNameInventory)) return;
 
+        event.setCancelled(true);
+
         ((ChangeNameInventory) inventory.getHolder()).onInventoryClick(event);
     }
 
