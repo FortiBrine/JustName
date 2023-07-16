@@ -1,2 +1,35 @@
+messages:
+  # Плейсхолдеров нет
+  permission: "§4Ошибка: §fУ вас нет прав."
+  symbols: "§4Ошибка: §fИмя должно содержать только кирилические симолвы :("
+  not-enough: "§4Ошибка: §fНедостаточно денег. Нужно 20000."
+
+  # %player - имя игрока
+  # %name - будущее имя игрока
+  request: "§cINFO: §7Игрок %player отправил запрос на смену имени."
+  send: "§cINFO: §7Вы отправили запрос на смену имени. Ждите пока его одобрят."
+  accept: "§cINFO: §7Ваше имя одобрили."
+  decline: "§cINFO: §7Ваше имя отклонили."
+
+  # %admin - имя администратора
+  # %player - имя игрока
+  # %name - будущее имя игрока
+  okay: "§cINFO: §7Администратор %admin одобрил имя %player."
+  bad: "§cINFO: §7Администратор %admin отклонил имя %player."
+
+settings:
+  need-admin: true
+  money: 20000
+  first-nickname-free: true
+  first-nickname-need-admin: false
+
+player: []
+
 menu:
   title: "Меню"
+
+  item:
+    material: NAME_TAG
+    name: "§7%player"
+    lore:
+      - "§7Новое имя - %name"

@@ -14,7 +14,7 @@ public class ChangeNameInventory implements InventoryHolder {
     private final Player player;
     private final FileConfiguration config;
 
-    public ChangeNameInventory(JustName plugin, Player player, String name) {
+    public ChangeNameInventory(JustName plugin, Player player) {
         this.plugin = plugin;
         this.player = player;
         this.config = plugin.getConfig();

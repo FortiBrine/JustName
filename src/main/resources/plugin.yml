@@ -23,3 +23,6 @@ permissions:
   justname.changename.list:
     default: op
     description: "Изменить другим имя"
+  justname.see:
+    default: op
+    description: "Разрешение на просмотр сообщений про смену имени"
