@@ -64,7 +64,7 @@ public class CommandChangeName implements CommandExecutor {
         }
 
         String name = args[0];
-        String sename = args[1];
+        String surname = args[1];
 
         for (char c : name.toCharArray()) {
             if (!((int) 'а' <= c && c <= (int) 'я')) {
@@ -77,7 +77,7 @@ public class CommandChangeName implements CommandExecutor {
             }
         }
 
-        for (char c : sename.toCharArray()) {
+        for (char c : surname.toCharArray()) {
             if (!((int) 'а' <= c && c <= (int) 'я')) {
                 player.sendMessage(
                         JSONManager.supportMessagesJSON(
@@ -89,15 +89,33 @@ public class CommandChangeName implements CommandExecutor {
         }
 
         name = name.toLowerCase();
-        sename = sename.toLowerCase();
+        surname = surname.toLowerCase();
 
         StringBuilder nameBuilder = new StringBuilder(name);
-        StringBuilder senameBuilder = new StringBuilder(sename);
+        StringBuilder surnameBuilder = new StringBuilder(surname);
 
         nameBuilder.setCharAt(0, Character.toUpperCase(name.charAt(0)));
-        senameBuilder.setCharAt(0, Character.toUpperCase(sename.charAt(0)));
+        surnameBuilder.setCharAt(0, Character.toUpperCase(surname.charAt(0)));
 
-        String newName = String.valueOf(nameBuilder.append(' ').append(senameBuilder));
+        if (name.length() < config.getInt("settings.min-name")) {
+            player.sendMessage(
+                    JSONManager.supportMessagesJSON(
+                            HEXManager.supportColorsHEX(
+                                    config.getString("messages.name-too-small"))).replace("&", "§"));
+
+            return true;
+        }
+
+        if (surname.length() < config.getInt("settings.min-surname")) {
+            player.sendMessage(
+                    JSONManager.supportMessagesJSON(
+                            HEXManager.supportColorsHEX(
+                                    config.getString("messages.surname-too-small"))).replace("&", "§"));
+
+            return true;
+        }
+
+        String newName = String.valueOf(nameBuilder.append(' ').append(surnameBuilder));
 
         ItemStack item = new ItemStack(Material.matchMaterial(config.getString("menu.item.material")));
 
@@ -139,6 +157,8 @@ public class CommandChangeName implements CommandExecutor {
 
                 plugin.saveConfig();
                 plugin.reloadConfig();
+
+                player.setDisplayName(newName);
 
                 player.sendMessage(JSONManager.supportMessagesJSON(HEXManager.supportColorsHEX(config.getString("messages.send")
                                 .replace("%player", player.getName())
@@ -186,6 +206,8 @@ public class CommandChangeName implements CommandExecutor {
 
             plugin.saveConfig();
             plugin.reloadConfig();
+
+            player.setDisplayName(newName);
 
             player.sendMessage(JSONManager.supportMessagesJSON(HEXManager.supportColorsHEX(config.getString("messages.send")
                             .replace("%player", player.getName())

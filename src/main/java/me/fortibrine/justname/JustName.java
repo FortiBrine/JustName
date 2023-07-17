@@ -18,7 +18,7 @@ public class JustName extends JavaPlugin {
             this.saveDefaultConfig();
         }
 
-        Bukkit.getPluginManager().registerEvents(new Listener(), this);
+        Bukkit.getPluginManager().registerEvents(new Listener(this), this);
 
         this.getCommand("changename").setExecutor(new CommandChangeName(this));
 

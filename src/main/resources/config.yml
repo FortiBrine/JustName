@@ -3,6 +3,8 @@ messages:
   permission: "§4Ошибка: §fУ вас нет прав."
   symbols: "§4Ошибка: §fИмя должно содержать только кирилические симолвы :("
   not-enough: "§4Ошибка: §fНедостаточно денег. Нужно 20000."
+  name-too-small: "§4Ошибка: §fИмя должно быть больше."
+  surname-too-small: "§4Ошибка: §fФамилия должна быть больше."
 
   # %player - имя игрока
   # %name - будущее имя игрока
@@ -22,6 +24,8 @@ settings:
   money: 20000
   first-nickname-free: true
   first-nickname-need-admin: false
+  min-name: 3
+  min-surname: 3
 
 player: []
 

@@ -33,14 +33,15 @@ public class ChangeNameInventory implements InventoryHolder {
     }
 
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getCursor() == null) return;
+
+        if (event.getCurrentItem() == null) return;
 
         String name = null;
 
         for (String playerName : VariableManager.keySetItemStacks()) {
             ItemStack itemStack = VariableManager.getItemStacks(playerName);
 
-            if (event.getCursor() == itemStack) {
+            if (event.getCurrentItem().equals(itemStack)) {
                 name = playerName;
                 break;
             }
@@ -59,24 +60,43 @@ public class ChangeNameInventory implements InventoryHolder {
             VariableManager.removeName(name);
             VariableManager.removeItemStack(name);
 
+            if (Bukkit.getOfflinePlayer(name).isOnline()) {
+
+                Bukkit.getPlayer(name).setDisplayName(newName);
+                Bukkit.getPlayer(name).sendMessage(JSONManager.supportMessagesJSON(HEXManager.supportColorsHEX(config.getString("messages.accept")
+                                .replace("%player", player.getName())
+                                .replace("%name", newName))
+                        .replace("&", "§")));
+            }
+
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 if (!onlinePlayer.hasPermission(plugin.getDescription().getPermissions().get(3))) continue;
 
-                player.sendMessage(JSONManager.supportMessagesJSON(HEXManager.supportColorsHEX(config.getString("messages.accept")
-                                .replace("%player", player.getName())
-                                .replace("%name", newName))
+                player.sendMessage(JSONManager.supportMessagesJSON(HEXManager.supportColorsHEX(config.getString("messages.okay")
+                                .replace("%player", name)
+                                .replace("%name", newName)
+                                .replace("%admin", player.getName()))
                         .replace("&", "§")));
             }
         } else if (event.getClick() == ClickType.RIGHT) {
             VariableManager.removeName(name);
             VariableManager.removeItemStack(name);
 
+            if (Bukkit.getOfflinePlayer(name).isOnline()) {
+
+                Bukkit.getPlayer(name).sendMessage(JSONManager.supportMessagesJSON(HEXManager.supportColorsHEX(config.getString("messages.decline")
+                                .replace("%player", player.getName())
+                                .replace("%name", newName))
+                        .replace("&", "§")));
+            }
+
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 if (!onlinePlayer.hasPermission(plugin.getDescription().getPermissions().get(3))) continue;
 
-                player.sendMessage(JSONManager.supportMessagesJSON(HEXManager.supportColorsHEX(config.getString("messages.decline")
-                                .replace("%player", player.getName())
-                                .replace("%name", newName))
+                player.sendMessage(JSONManager.supportMessagesJSON(HEXManager.supportColorsHEX(config.getString("messages.bad")
+                                .replace("%player", name)
+                                .replace("%name", newName)
+                                .replace("%admin", player.getName()))
                         .replace("&", "§")));
             }
         }
